@@ -1,37 +1,25 @@
 import CodeMirror from '@uiw/react-codemirror'
 import { clojure } from '@nextjournal/lang-clojure'
 import { useState } from 'react'
+import { clearP5import, clearWindowGlobals, compileAndSet, importP5, removeDefaultCanvas } from '../utils'
 
 const Editor = () => {
 	const [source, setSource] = useState("")
 	const [initialized, setInitialized] = useState(false);
 
 	function run() {
-		window.draw = null;
-		window.setup = null;
-
-		let scriptEl = document.getElementById("p5-script").firstElementChild;
-		if (scriptEl) {
-			scriptEl.remove()
-		}
-
-		cljs.user = { setup: () => { }, draw: () => { } }
-
-		eval(cljs.compile(source))
-
-		window.setup = cljs.user.setup;
-		window.draw = cljs.user.draw;
-
-		let canvas = document.getElementById("defaultCanvas0")
-		if (canvas) {
-			canvas.remove()
-		}
-
-		const script = document.createElement("script")
-		script.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js")
-		document.getElementById("p5-script").appendChild(script)
+		// CLEAR ANY STATE
+		clearWindowGlobals();
+		clearP5import("p5-script");
+		removeDefaultCanvas()
+		// PREPARE P5
+		compileAndSet(source)
+		importP5("p5-script");
 
 		if (initialized) {
+			// For re-running a sketch after the very first run,
+			// since P5 does not automatically restart when setup()
+			// is updated.
 			cljs.user.setup();
 		}
 		if (!initialized) {
