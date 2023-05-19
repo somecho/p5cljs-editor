@@ -44,7 +44,7 @@ const Editor = () => {
 			<div id="p5-script">
 			</div>
 			<button
-				className="m-2 px-2 py-1 bg-fuchsia-600 rounded text-white font-semibold"
+				className="m-2 px-2 py-1 bg-fuchsia-600 rounded text-white font-black"
 				onClick={run}
 			>run</button>
 			<div className="flex justify-evenly">
@@ -52,7 +52,7 @@ const Editor = () => {
 					extensions={[clojure()]}
 					onChange={e => setSource(e)}
 					height="75vh"
-					className="flex-1 border-2 border-neutral-200 rounded m-2"
+					className="flex-1 border border-neutral-200 rounded m-2"
 				/>
 				<div id="canvas-parent" className="flex-1 m-2"></div>
 			</div>
