@@ -1,11 +1,24 @@
 import CodeMirror from '@uiw/react-codemirror'
 import { clojure } from '@nextjournal/lang-clojure'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { clearP5import, clearWindowGlobals, compileAndSet, importP5, removeDefaultCanvas } from '../utils'
+import { useSearchParams } from 'react-router-dom'
+
+const defaultSketch = `(defn setup []
+  (js/createCanvas 400 400))
+(defn draw []
+  (js/background 220))`
 
 const Editor = () => {
 	const [source, setSource] = useState("")
 	const [initialized, setInitialized] = useState(false);
+	const [urlParams, setUrlParams] = useSearchParams();
+	useEffect(() => {
+		setSource(defaultSketch)
+		if (urlParams.get("sketch")) {
+			setSource(atob(urlParams.get("sketch")))
+		}
+	}, [])
 
 	function run() {
 		// CLEAR ANY STATE
@@ -32,11 +45,16 @@ const Editor = () => {
 			const p5canvas = document.getElementById("defaultCanvas0")
 			if (p5canvas) {
 				document.getElementById("canvas-parent").appendChild(p5canvas);
-				document.querySelector("main").remove();
+			}
+			const canvasContainer = document.querySelector("main")
+			if (canvasContainer) {
+				canvasContainer.remove();
 			}
 		};
 		var observer = new MutationObserver(callback);
 		observer.observe(targetNode, config);
+
+		setUrlParams({ sketch: btoa(source) })
 	}
 
 	return (
@@ -49,12 +67,14 @@ const Editor = () => {
 			>run</button>
 			<div className="flex justify-evenly">
 				<CodeMirror
+					value={source}
 					extensions={[clojure()]}
 					onChange={e => setSource(e)}
 					height="75vh"
 					className="flex-1 border border-neutral-200 rounded m-2"
 				/>
-				<div id="canvas-parent" className="flex-1 m-2"></div>
+				<div id="canvas-parent" className="flex-1 m-2">
+				</div>
 			</div>
 		</div>
 	)
