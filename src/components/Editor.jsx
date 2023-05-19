@@ -32,6 +32,7 @@ const Editor = () => {
 			const p5canvas = document.getElementById("defaultCanvas0")
 			if (p5canvas) {
 				document.getElementById("canvas-parent").appendChild(p5canvas);
+				document.querySelector("main").remove();
 			}
 		};
 		var observer = new MutationObserver(callback);
@@ -43,7 +44,7 @@ const Editor = () => {
 			<div id="p5-script">
 			</div>
 			<button onClick={run}>run</button>
-			<div>
+			<div className="flex">
 				<CodeMirror
 					extensions={[clojure()]}
 					onChange={e => setSource(e)}
