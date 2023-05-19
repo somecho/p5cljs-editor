@@ -43,14 +43,18 @@ const Editor = () => {
 		<div>
 			<div id="p5-script">
 			</div>
-			<button onClick={run}>run</button>
-			<div className="flex">
+			<button
+				className="m-2 px-2 py-1 bg-fuchsia-600 rounded text-white font-semibold"
+				onClick={run}
+			>run</button>
+			<div className="flex justify-evenly">
 				<CodeMirror
 					extensions={[clojure()]}
 					onChange={e => setSource(e)}
-					height="300px"
+					height="75vh"
+					className="flex-1 border-2 border-neutral-200 rounded m-2"
 				/>
-				<div id="canvas-parent"></div>
+				<div id="canvas-parent" className="flex-1 m-2"></div>
 			</div>
 		</div>
 	)
