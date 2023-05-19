@@ -25,6 +25,17 @@ const Editor = () => {
 		if (!initialized) {
 			setInitialized(true)
 		}
+
+		var targetNode = document.body;
+		var config = { childList: true };
+		var callback = function() {
+			const p5canvas = document.getElementById("defaultCanvas0")
+			if (p5canvas) {
+				document.getElementById("canvas-parent").appendChild(p5canvas);
+			}
+		};
+		var observer = new MutationObserver(callback);
+		observer.observe(targetNode, config);
 	}
 
 	return (
@@ -38,7 +49,7 @@ const Editor = () => {
 					onChange={e => setSource(e)}
 					height="300px"
 				/>
-				<div className="canvas-parent"></div>
+				<div id="canvas-parent"></div>
 			</div>
 		</div>
 	)
