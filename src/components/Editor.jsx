@@ -26,7 +26,7 @@ const Editor = () => {
 		clearP5import("p5-script");
 		removeDefaultCanvas()
 		// PREPARE P5
-		compileAndSet(source)
+		compileAndSet(source, "user-script")
 		importP5("p5-script");
 
 		if (initialized) {
@@ -59,8 +59,8 @@ const Editor = () => {
 
 	return (
 		<div>
-			<div id="p5-script">
-			</div>
+			<div id="p5-script"></div>
+			<div id="user-script"></div>
 			<button
 				className="m-2 px-2 py-1 bg-fuchsia-600 rounded text-white font-black"
 				onClick={run}
