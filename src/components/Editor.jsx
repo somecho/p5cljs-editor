@@ -71,9 +71,9 @@ const Editor = () => {
 					extensions={[clojure()]}
 					onChange={e => setSource(e)}
 					height="75vh"
-					className="flex-1 border border-neutral-200 rounded m-2"
+					className="grow shrink border border-neutral-200 w-0 rounded m-2"
 				/>
-				<div id="canvas-parent" className="flex-1 m-2">
+				<div id="canvas-parent" className="grow shrink w-0 m-2">
 				</div>
 			</div>
 		</div>
