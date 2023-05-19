@@ -11,3 +11,8 @@
 .cm-editor * {
 	font-family: 'JetBrains Mono', monospace;
 }
+
+section>p>a{
+	color: blue;
+	text-decoration: underline;
+}
