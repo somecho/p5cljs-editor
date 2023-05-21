@@ -17,6 +17,11 @@ const NavBar = () => {
 						About
 					</Link>
 				</li>
+				<li className="pt-3 px-4">
+					<Link to="tutorial">
+						Tutorial
+					</Link>
+				</li>
 			</ul>
 		</nav>
 	)

@@ -12,7 +12,25 @@
 	font-family: 'JetBrains Mono', monospace;
 }
 
+.hljs * {
+	font-family: 'JetBrains Mono', monospace;
+}
+
 section>p>a{
+	color: blue;
+	text-decoration: underline;
+}
+
+p code {
+	font-family: 'JetBrains Mono', monospace;
+	background: #EBEBEB;
+	padding: 2px 4px;
+}
+
+section ul li {
+	list-style: inside;
+}
+section ul li a {
 	color: blue;
 	text-decoration: underline;
 }
