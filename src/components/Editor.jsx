@@ -21,10 +21,6 @@ const Editor = () => {
 	}, [])
 
 	function run() {
-		// CLEAR ANY STATE
-		clearWindowGlobals();
-		clearP5import("p5-script");
-		removeDefaultCanvas()
 		// PREPARE P5
 		compileAndSet(source, "user-script")
 		importP5("p5-script");
