@@ -21,10 +21,6 @@ const Editor = () => {
 	}, [])
 
 	function run() {
-		// CLEAR ANY STATE
-		clearWindowGlobals();
-		clearP5import("p5-script");
-		removeDefaultCanvas()
 		// PREPARE P5
 		compileAndSet(source, "user-script")
 		importP5("p5-script");
@@ -41,7 +37,7 @@ const Editor = () => {
 
 		var targetNode = document.body;
 		var config = { childList: true };
-		var callback = function() {
+		var callback = function () {
 			const p5canvas = document.getElementById("defaultCanvas0")
 			if (p5canvas) {
 				document.getElementById("canvas-parent").appendChild(p5canvas);
@@ -57,6 +53,13 @@ const Editor = () => {
 		setUrlParams({ sketch: btoa(source) })
 	}
 
+	function stop() {
+		// CLEAR ANY STATE
+		clearWindowGlobals();
+		clearP5import("p5-script");
+		removeDefaultCanvas()
+	}
+
 	return (
 		<div>
 			<div id="p5-script"></div>
@@ -65,6 +68,10 @@ const Editor = () => {
 				className="m-2 px-2 py-1 bg-fuchsia-600 rounded text-white font-black"
 				onClick={run}
 			>run</button>
+			<button
+				className="m-2 px-2 py-1 bg-neutral-400 rounded text-white font-black"
+				onClick={stop}
+			>stop</button>
 			<div className="flex justify-evenly">
 				<CodeMirror
 					value={source}
