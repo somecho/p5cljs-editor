@@ -73,7 +73,7 @@ const Editor = () => {
 				onClick={run}
 			>run</button>
 			<button
-				className="m-2 px-2 py-1 bg-neutral-700 rounded text-white font-black"
+				className="m-2 px-2 py-1 bg-neutral-400 rounded text-white font-black"
 				onClick={stop}
 			>stop</button>
 			<div className="flex justify-evenly">
