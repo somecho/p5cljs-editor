@@ -7,3 +7,11 @@ tutorial](https://p5js.org/get-started/).
 
 This is a quick tutorial to get you started writing p5 sketches in
 ClojureScript and learn more about the Clojure/ClojureScript language.
+
+## Basics
+
+```clj
+(defn setup []
+  (js/hello))
+```
+
