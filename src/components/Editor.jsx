@@ -3,6 +3,7 @@ import { clojure } from '@nextjournal/lang-clojure'
 import { useEffect, useState } from 'react'
 import { clearP5import, clearWindowGlobals, compileAndSet, importP5, removeDefaultCanvas } from '../utils'
 import { useSearchParams } from 'react-router-dom'
+import { LZString } from '../LZString'
 
 const defaultSketch = `(defn setup []
   (js/createCanvas 400 400))
@@ -16,7 +17,7 @@ const Editor = () => {
 	useEffect(() => {
 		setSource(defaultSketch)
 		if (urlParams.get("sketch")) {
-			setSource(atob(urlParams.get("sketch")))
+			setSource(LZString.decompressFromBase64(urlParams.get("sketch")))
 		}
 	}, [])
 
@@ -37,7 +38,7 @@ const Editor = () => {
 
 		var targetNode = document.body;
 		var config = { childList: true };
-		var callback = function () {
+		var callback = function() {
 			const p5canvas = document.getElementById("defaultCanvas0")
 			if (p5canvas) {
 				document.getElementById("canvas-parent").appendChild(p5canvas);
@@ -50,7 +51,7 @@ const Editor = () => {
 		var observer = new MutationObserver(callback);
 		observer.observe(targetNode, config);
 
-		setUrlParams({ sketch: btoa(source) })
+		setUrlParams({ sketch: LZString.compressToBase64(source) })
 	}
 
 	function stop() {
