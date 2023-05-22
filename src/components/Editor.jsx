@@ -5,6 +5,7 @@ import { clearP5import, clearWindowGlobals, compileAndSet, importP5, removeDefau
 import { useSearchParams } from 'react-router-dom'
 import { LZString } from '../lib/LZString'
 
+
 const defaultSketch = `(defn setup []
   (js/createCanvas 400 400))
 (defn draw []
