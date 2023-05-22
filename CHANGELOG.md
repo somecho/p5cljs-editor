@@ -1,3 +1,8 @@
+# 0.7.2
+## Code Changes
+- using new cljs-compiler-compiler build, which returns any errors encountered
+- if error is encountered, prevent sketch from starting and print error to console
+
 # 0.7.1
 ## Code Changes
 - move article related css to custom components
