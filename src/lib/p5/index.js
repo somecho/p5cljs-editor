@@ -1,4 +1,42 @@
 /**
+ * p5 global structure and event functions
+ */
+const p5Methods = {
+	//structure
+	preload: () => { },
+	setup: () => { },
+	draw: () => { },
+	//key events
+	keyReleased: () => { },
+	keyPressed: () => { },
+	keyTyped: () => { },
+	//device events
+	deviceMoved: () => { },
+	deviceTurned: () => { },
+	deviceShaken: () => { },
+	//mouse events
+	mouseMoved: () => { },
+	mouseDragged: () => { },
+	mousePressed: () => { },
+	mouseReleased: () => { },
+	mouseClicked: () => { },
+	doubleClicked: () => { },
+	//touch events
+	touchStarted: () => { },
+	touchMoved: () => { },
+	touchEnded: () => { },
+}
+
+/**
+ * Attaches all defined user methods (which are p5 methods) to the window object
+ */
+function assignWindowGlobals() {
+	Object.keys(p5Methods).forEach((key => {
+		window[key] = cljs.user[key] || p5Methods[key]
+	}))
+}
+
+/**
  * Used for removing P5 CDN script from dedicated HTML element.
  * @param {string} id - ID of dedicated HTML parent element holding P5 CDN script
  */
@@ -13,8 +51,9 @@ export function clearP5import(id) {
  * Removes P5 global functions from window.
  */
 export function clearWindowGlobals() {
-	window.draw = undefined;
-	window.setup = undefined;
+	Object.keys(p5Methods).forEach((key=>{
+		window[key] = undefined;
+	}))
 }
 
 /**
@@ -27,12 +66,11 @@ export function compileAndSet(source, id) {
 	if (scriptHolder.firstElementChild) {
 		scriptHolder.firstElementChild.remove()
 	}
-	cljs.user = { setup: () => { }, draw: () => { } }
+	cljs.user = p5Methods;
 	const script = document.createElement("script")
 	script.innerHTML = cljs.compile(source)
 	scriptHolder.appendChild(script)
-	window.setup = cljs.user.setup;
-	window.draw = cljs.user.draw;
+	assignWindowGlobals()
 }
 
 /**
