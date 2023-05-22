@@ -51,7 +51,7 @@ export function clearP5import(id) {
  * Removes P5 global functions from window.
  */
 export function clearWindowGlobals() {
-	Object.keys(p5Methods).forEach((key=>{
+	Object.keys(p5Methods).forEach((key => {
 		window[key] = undefined;
 	}))
 }
@@ -62,15 +62,23 @@ export function clearWindowGlobals() {
  * @param {string} id - ID of HTML Element to hold user's script.
  */
 export function compileAndSet(source, id) {
-	const scriptHolder = document.getElementById(id)
-	if (scriptHolder.firstElementChild) {
-		scriptHolder.firstElementChild.remove()
+	const compiled = cljs.compile(source)
+	if (!compiled.name) {
+		const scriptHolder = document.getElementById(id)
+		if (scriptHolder.firstElementChild) {
+			scriptHolder.firstElementChild.remove()
+		}
+		cljs.user = p5Methods;
+		const script = document.createElement("script")
+		script.innerHTML = compiled;
+		scriptHolder.appendChild(script)
+		assignWindowGlobals()
+		return null
+	} else {
+		return compiled.cause.message
+		// console.error(compiled.cause.message)
+		// return false
 	}
-	cljs.user = p5Methods;
-	const script = document.createElement("script")
-	script.innerHTML = cljs.compile(source)
-	scriptHolder.appendChild(script)
-	assignWindowGlobals()
 }
 
 /**
