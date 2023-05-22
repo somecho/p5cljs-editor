@@ -1,9 +1,10 @@
 import CodeMirror from '@uiw/react-codemirror'
 import { clojure } from '@nextjournal/lang-clojure'
 import { useEffect, useState } from 'react'
-import { clearP5import, clearWindowGlobals, compileAndSet, importP5, removeDefaultCanvas } from '../utils'
+import { clearP5import, clearWindowGlobals, compileAndSet, importP5, removeDefaultCanvas } from '../lib/p5'
 import { useSearchParams } from 'react-router-dom'
-import { LZString } from '../LZString'
+import { LZString } from '../lib/LZString'
+
 
 const defaultSketch = `(defn setup []
   (js/createCanvas 400 400))
@@ -24,16 +25,17 @@ const Editor = () => {
 	function run() {
 		// PREPARE P5
 		compileAndSet(source, "user-script")
-		importP5("p5-script");
+
+		if (!initialized) {
+			setInitialized(true)
+			importP5("p5-script");
+		}
 
 		if (initialized) {
 			// For re-running a sketch after the very first run,
 			// since P5 does not automatically restart when setup()
 			// is updated.
 			cljs.user.setup();
-		}
-		if (!initialized) {
-			setInitialized(true)
 		}
 
 		var targetNode = document.body;
