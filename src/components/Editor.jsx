@@ -3,7 +3,7 @@ import { clojure } from '@nextjournal/lang-clojure'
 import { useEffect, useState } from 'react'
 import { clearP5import, clearWindowGlobals, compileAndSet, importP5, removeDefaultCanvas } from '../lib/p5'
 import { useSearchParams } from 'react-router-dom'
-import { LZString } from '../LZString'
+import { LZString } from '../lib/LZString'
 
 const defaultSketch = `(defn setup []
   (js/createCanvas 400 400))
