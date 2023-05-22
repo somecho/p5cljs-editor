@@ -15,6 +15,7 @@ const Editor = () => {
 	const [source, setSource] = useState("")
 	const [initialized, setInitialized] = useState(false);
 	const [urlParams, setUrlParams] = useSearchParams();
+	const [error, setError] = useState(null);
 	useEffect(() => {
 		setSource(defaultSketch)
 		if (urlParams.get("sketch")) {
@@ -24,14 +25,18 @@ const Editor = () => {
 
 	function run() {
 		// PREPARE P5
-		compileAndSet(source, "user-script")
+		const error = compileAndSet(source, 'user-script')
+		if (error) {
+			setError(compileAndSet(source, "user-script"))
+			console.error(error)
+		}
 
 		if (!initialized) {
 			setInitialized(true)
 			importP5("p5-script");
 		}
 
-		if (initialized) {
+		if (initialized && !error) {
 			// For re-running a sketch after the very first run,
 			// since P5 does not automatically restart when setup()
 			// is updated.
