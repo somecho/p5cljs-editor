@@ -1,3 +1,7 @@
+# 0.7.1
+## Code Changes
+- move article related css to custom components
+ 
 # 0.7.0
 ## New Features
 - p5 structure and event functions like preload, mouseClicked, touchStarted are now available
