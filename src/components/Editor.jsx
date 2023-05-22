@@ -24,16 +24,17 @@ const Editor = () => {
 	function run() {
 		// PREPARE P5
 		compileAndSet(source, "user-script")
-		importP5("p5-script");
+
+		if (!initialized) {
+			setInitialized(true)
+			importP5("p5-script");
+		}
 
 		if (initialized) {
 			// For re-running a sketch after the very first run,
 			// since P5 does not automatically restart when setup()
 			// is updated.
 			cljs.user.setup();
-		}
-		if (!initialized) {
-			setInitialized(true)
 		}
 
 		var targetNode = document.body;
