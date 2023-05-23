@@ -1,3 +1,7 @@
+# 0.8.0
+## Breaking Changes
+- sketches now use deflate compression. Old sketches will break when shared.
+
 # 0.7.2
 ## Code Changes
 - using new cljs-compiler-compiler build, which returns any errors encountered
