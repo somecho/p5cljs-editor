@@ -1,7 +1,7 @@
 {
   "name": "p5-cljs-web-editor",
   "private": true,
-  "version": "0.7.2",
+  "version": "0.8.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@nextjournal/lang-clojure": "^1.0.0",
     "@uiw/react-codemirror": "^4.20.0",
+    "fflate": "^0.8.0",
     "highlight.js": "^11.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

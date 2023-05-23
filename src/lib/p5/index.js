@@ -76,8 +76,6 @@ export function compileAndSet(source, id) {
 		return null
 	} else {
 		return compiled.cause.message
-		// console.error(compiled.cause.message)
-		// return false
 	}
 }
 
