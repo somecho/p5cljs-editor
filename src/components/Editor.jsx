@@ -3,13 +3,26 @@ import { clojure } from '@nextjournal/lang-clojure'
 import { useEffect, useState } from 'react'
 import { clearP5import, clearWindowGlobals, compileAndSet, importP5, removeDefaultCanvas } from '../lib/p5'
 import { useSearchParams } from 'react-router-dom'
-import { LZString } from '../lib/LZString'
-
+import { strToU8, strFromU8, decompressSync,deflateSync } from 'fflate'
 
 const defaultSketch = `(defn setup []
   (js/createCanvas 400 400))
 (defn draw []
   (js/background 220))`
+
+function encode(s){
+	const u8 = deflateSync(strToU8(s))
+	return btoa(String.fromCharCode.apply(null, u8));
+}
+
+function decode(s){
+	const binaryString = atob(s)
+	let bytes = new Uint8Array(binaryString.length);
+	for (let i = 0; i < binaryString.length; i++) {
+		bytes[i] = binaryString.charCodeAt(i)
+	}
+	return strFromU8(decompressSync(bytes))
+}
 
 const Editor = () => {
 	const [source, setSource] = useState("")
@@ -19,7 +32,7 @@ const Editor = () => {
 	useEffect(() => {
 		setSource(defaultSketch)
 		if (urlParams.get("sketch")) {
-			setSource(LZString.decompressFromBase64(urlParams.get("sketch")))
+			setSource(decode(urlParams.get("sketch")))
 		}
 	}, [])
 
@@ -58,7 +71,7 @@ const Editor = () => {
 		var observer = new MutationObserver(callback);
 		observer.observe(targetNode, config);
 
-		setUrlParams({ sketch: LZString.compressToBase64(source) })
+		setUrlParams({ sketch: encode(source) })
 	}
 
 	function stop() {
