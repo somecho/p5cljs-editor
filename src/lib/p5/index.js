@@ -1,3 +1,4 @@
+import cljs from '../cljs'
 /**
  * p5 global structure and event functions
  */
