@@ -1,3 +1,7 @@
+# 0.8.3
+## Code Changes
+- setup Jest for testing
+
 # 0.8.0
 ## Breaking Changes
 - sketches now use deflate compression. Old sketches will break when shared.
