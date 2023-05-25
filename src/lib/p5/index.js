@@ -39,17 +39,6 @@ function assignWindowGlobals() {
 }
 
 /**
- * Used for removing P5 CDN script from dedicated HTML element.
- * @param {string} id - ID of dedicated HTML parent element holding P5 CDN script
- */
-export function clearP5import(id) {
-	let scriptEl = document.getElementById(id).firstElementChild;
-	if (scriptEl) {
-		scriptEl.remove()
-	}
-}
-
-/**
  * Removes P5 global functions like setup and draw from window.
  */
 export function clearWindowGlobals() {
@@ -87,6 +76,7 @@ export function compileAndSet(source, id) {
  */
 export function createP5ScriptTag(){
 	const script = document.createElement("script")
+	script.setAttribute("id","p5-cdn")
 	script.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js")
 	return script;
 }
