@@ -3,7 +3,7 @@ import { cljs } from '../cljs'
 /**
  * p5 global structure and event functions
  */
-const p5Methods = {
+export const p5Methods = {
 	//structure
 	preload: () => { },
 	setup: () => { },
@@ -32,7 +32,7 @@ const p5Methods = {
 /**
  * Attaches all defined user methods (which are p5 methods) to the window object
  */
-function assignWindowGlobals() {
+export function assignWindowGlobals() {
 	Object.keys(p5Methods).forEach((key => {
 		window[key] = cljs.user[key] || p5Methods[key]
 	}))
@@ -45,29 +45,6 @@ export function clearWindowGlobals() {
 	Object.keys(p5Methods).forEach((key => {
 		window[key] = undefined;
 	}))
-}
-
-/**
- * Compiles CLJS source, appends it to HTML element to make globally available.
- * @param {string} source - cljs source.
- * @param {string} id - ID of HTML Element to hold user's script.
- */
-export function compileAndSet(source, id) {
-	const compiled = cljs.compile(source)
-	if (!compiled.name) {
-		const scriptHolder = document.getElementById(id)
-		if (scriptHolder.firstElementChild) {
-			scriptHolder.firstElementChild.remove()
-		}
-		cljs.user = p5Methods;
-		const script = document.createElement("script")
-		script.innerHTML = compiled;
-		scriptHolder.appendChild(script)
-		assignWindowGlobals()
-		return null
-	} else {
-		return compiled.cause.message
-	}
 }
 
 /**

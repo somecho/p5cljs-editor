@@ -1,9 +1,9 @@
 import CodeMirror from '@uiw/react-codemirror'
 import { clojure } from '@nextjournal/lang-clojure'
 import { useEffect, useState } from 'react'
-import { clearWindowGlobals, compileAndSet, createP5ScriptTag, removeElementById } from '../lib/p5'
+import { clearWindowGlobals, p5Methods, assignWindowGlobals, createP5ScriptTag, removeElementById } from '../lib/p5'
 import { useSearchParams } from 'react-router-dom'
-import { defaultSketch } from '../lib/cljs'
+import { defaultSketch, compile } from '../lib/cljs'
 import { encode, decode } from "../lib/compression"
 
 const Editor = () => {
@@ -11,6 +11,9 @@ const Editor = () => {
 	const [initialized, setInitialized] = useState(false);
 	const [urlParams, setUrlParams] = useSearchParams();
 	const [error, setError] = useState(null);
+	const [compiled, setCompiled] = useState("");
+	cljs.user = {}
+
 	useEffect(() => {
 		setSource(defaultSketch)
 		if (urlParams.get("sketch")) {
@@ -18,12 +21,27 @@ const Editor = () => {
 		}
 	}, [])
 
+	useEffect(() => {
+		// if (compiled) {
+		// cljs.user.setup();
+		// }
+		//
+	}, [compiled])
 	function run() {
 		// PREPARE P5
-		const error = compileAndSet(source, 'user-script')
-		if (error) {
-			setError(compileAndSet(source, "user-script"))
-			console.error(error)
+		const compileResult = compile(source)
+		if (!compileResult.name) {
+			const scriptHolder = document.getElementById('user-script')
+			if (scriptHolder.firstElementChild) {
+				scriptHolder.firstElementChild.remove()
+			}
+			cljs.user = p5Methods;
+			const script = document.createElement("script")
+			script.innerHTML = compileResult;
+			scriptHolder.appendChild(script)
+			assignWindowGlobals()
+		} else {
+			console.error(compiled.cause.message)
 		}
 
 		if (!initialized) {
@@ -60,6 +78,7 @@ const Editor = () => {
 
 	function stop() {
 		// CLEAR ANY STATE
+		setCompiled("")
 		clearWindowGlobals();
 		removeElementById("p5-cdn");
 		removeElementById("defaultCanvas0")

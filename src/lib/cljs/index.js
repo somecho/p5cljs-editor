@@ -13,3 +13,7 @@ export const defaultSketch = `(defn setup []
   (js/createCanvas 400 400))
 (defn draw []
   (js/background 220))`
+
+export function compile(source) {
+	return cljs.compile(source)
+}
