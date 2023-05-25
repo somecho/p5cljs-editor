@@ -1,3 +1,7 @@
+# 0.8.4
+## Code Changes
+- refactor code for testability and less mutability
+
 # 0.8.3
 ## Code Changes
 - setup Jest for testing
