@@ -11,8 +11,6 @@ const Editor = () => {
 	const [initialized, setInitialized] = useState(false);
 	const [urlParams, setUrlParams] = useSearchParams();
 	const [error, setError] = useState(null);
-	const [compiled, setCompiled] = useState("");
-	cljs.user = {}
 
 	useEffect(() => {
 		setSource(defaultSketch)
@@ -21,27 +19,22 @@ const Editor = () => {
 		}
 	}, [])
 
-	useEffect(() => {
-		// if (compiled) {
-		// cljs.user.setup();
-		// }
-		//
-	}, [compiled])
 	function run() {
 		// PREPARE P5
 		const compileResult = compile(source)
-		if (!compileResult.name) {
-			const scriptHolder = document.getElementById('user-script')
-			if (scriptHolder.firstElementChild) {
-				scriptHolder.firstElementChild.remove()
-			}
+		if (compileResult.name != "Error") {
+			removeElementById('user-sketch')
+
 			cljs.user = p5Methods;
+
 			const script = document.createElement("script")
+			script.setAttribute("id", "user-sketch")
 			script.innerHTML = compileResult;
-			scriptHolder.appendChild(script)
+			document.getElementById('user-script').appendChild(script)
+
 			assignWindowGlobals()
 		} else {
-			console.error(compiled.cause.message)
+			console.error(compileResult.cause.message)
 		}
 
 		if (!initialized) {
@@ -58,9 +51,7 @@ const Editor = () => {
 			cljs.user.setup();
 		}
 
-		var targetNode = document.body;
-		var config = { childList: true };
-		var callback = function() {
+		new MutationObserver(() => {
 			const p5canvas = document.getElementById("defaultCanvas0")
 			if (p5canvas) {
 				document.getElementById("canvas-parent").appendChild(p5canvas);
@@ -69,16 +60,13 @@ const Editor = () => {
 			if (canvasContainer) {
 				canvasContainer.remove();
 			}
-		};
-		var observer = new MutationObserver(callback);
-		observer.observe(targetNode, config);
+		}).observe(document.body, { childList: true });
 
 		setUrlParams({ sketch: encode(source) })
 	}
 
 	function stop() {
 		// CLEAR ANY STATE
-		setCompiled("")
 		clearWindowGlobals();
 		removeElementById("p5-cdn");
 		removeElementById("defaultCanvas0")
