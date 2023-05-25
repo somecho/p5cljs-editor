@@ -50,7 +50,7 @@ export function clearP5import(id) {
 }
 
 /**
- * Removes P5 global functions from window.
+ * Removes P5 global functions like setup and draw from window.
  */
 export function clearWindowGlobals() {
 	Object.keys(p5Methods).forEach((key => {
@@ -92,11 +92,12 @@ export function createP5ScriptTag(){
 }
 
 /**
- * Deletes the default canvas created by P5 on run.
+ * Removes an element from the DOM if it exists.
+ * @param {string} id - id of the element to be removed from the dom
  */
-export function removeDefaultCanvas() {
-	let canvas = document.getElementById("defaultCanvas0")
-	if (canvas) {
-		canvas.remove()
+export function removeElementById(id){
+	let elt = document.getElementById(id)
+	if(elt){
+		elt.remove()
 	}
 }

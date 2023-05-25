@@ -1,7 +1,7 @@
 import CodeMirror from '@uiw/react-codemirror'
 import { clojure } from '@nextjournal/lang-clojure'
 import { useEffect, useState } from 'react'
-import { clearP5import, clearWindowGlobals, compileAndSet, createP5ScriptTag, removeDefaultCanvas } from '../lib/p5'
+import { clearP5import, clearWindowGlobals, compileAndSet, createP5ScriptTag, removeElementById } from '../lib/p5'
 import { useSearchParams } from 'react-router-dom'
 import { strToU8, strFromU8, decompressSync, deflateSync } from 'fflate'
 
@@ -80,7 +80,7 @@ const Editor = () => {
 		// CLEAR ANY STATE
 		clearWindowGlobals();
 		clearP5import("p5-script");
-		removeDefaultCanvas()
+		removeElementById("defaultCanvas0")
 	}
 
 	return (
