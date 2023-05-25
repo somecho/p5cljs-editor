@@ -3,22 +3,8 @@ import { clojure } from '@nextjournal/lang-clojure'
 import { useEffect, useState } from 'react'
 import { clearWindowGlobals, compileAndSet, createP5ScriptTag, removeElementById } from '../lib/p5'
 import { useSearchParams } from 'react-router-dom'
-import { strToU8, strFromU8, decompressSync, deflateSync } from 'fflate'
 import { defaultSketch } from '../lib/cljs'
-
-function encode(s) {
-	const u8 = deflateSync(strToU8(s))
-	return btoa(String.fromCharCode.apply(null, u8));
-}
-
-function decode(s) {
-	const binaryString = atob(s)
-	let bytes = new Uint8Array(binaryString.length);
-	for (let i = 0; i < binaryString.length; i++) {
-		bytes[i] = binaryString.charCodeAt(i)
-	}
-	return strFromU8(decompressSync(bytes))
-}
+import { encode, decode } from "../lib/compression"
 
 const Editor = () => {
 	const [source, setSource] = useState("")
