@@ -1,4 +1,5 @@
 import { cljs } from '../cljs'
+
 /**
  * p5 global structure and event functions
  */
@@ -81,13 +82,13 @@ export function compileAndSet(source, id) {
 }
 
 /**
- * Creates script element with P5 CDN and inserts it into dedicated HTML element.
- * @param {string} id - ID of dedicated HTML parent to hold P5 script
+ * Creates a script element with P5 CDN and returns it.
+ * @returns {string} html literal
  */
-export function importP5(id) {
+export function createP5ScriptTag(){
 	const script = document.createElement("script")
 	script.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js")
-	document.getElementById(id).appendChild(script)
+	return script;
 }
 
 /**
