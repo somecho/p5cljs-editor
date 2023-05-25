@@ -9,3 +9,7 @@
 /** @type {{compile: (source:string)=>(string|{name: string, cause: { message:string, name: string, stack: string}, stack: string, message: string }), user: {}}
  */
 export const cljs = window.cljs
+export const defaultSketch = `(defn setup []
+  (js/createCanvas 400 400))
+(defn draw []
+  (js/background 220))`

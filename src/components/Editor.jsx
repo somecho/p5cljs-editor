@@ -4,11 +4,7 @@ import { useEffect, useState } from 'react'
 import { clearWindowGlobals, compileAndSet, createP5ScriptTag, removeElementById } from '../lib/p5'
 import { useSearchParams } from 'react-router-dom'
 import { strToU8, strFromU8, decompressSync, deflateSync } from 'fflate'
-
-const defaultSketch = `(defn setup []
-  (js/createCanvas 400 400))
-(defn draw []
-  (js/background 220))`
+import { defaultSketch } from '../lib/cljs'
 
 function encode(s) {
 	const u8 = deflateSync(strToU8(s))
