@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { clearP5import, clearWindowGlobals, compileAndSet, importP5, removeDefaultCanvas } from '../lib/p5'
 import { useSearchParams } from 'react-router-dom'
 import { strToU8, strFromU8, decompressSync,deflateSync } from 'fflate'
-import cljs from '../lib/cljs'
 
 const defaultSketch = `(defn setup []
   (js/createCanvas 400 400))
