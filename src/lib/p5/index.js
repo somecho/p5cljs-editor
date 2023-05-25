@@ -34,7 +34,7 @@ export const p5Methods = {
  */
 export function assignWindowGlobals() {
 	Object.keys(p5Methods).forEach((key => {
-		window[key] = cljs.user[key] || p5Methods[key]
+		window[key] = window.cljs.user[key] || p5Methods[key]
 	}))
 }
 

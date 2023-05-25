@@ -25,7 +25,7 @@ const Editor = () => {
 		if (compileResult.name != "Error") {
 			removeElementById('user-sketch')
 
-			cljs.user = p5Methods;
+			window.cljs.user = p5Methods;
 
 			const script = document.createElement("script")
 			script.setAttribute("id", "user-sketch")
