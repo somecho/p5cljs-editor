@@ -15,7 +15,7 @@ const Article = ({ markdown }) => {
 				components={{
 					h1: ({ ...props }) => <h1 className="font-bold text-4xl my-8" {...props} />,
 					h2: ({ ...props }) => <h2 className="font-bold text-2xl mt-6" {...props} />,
-					h3: ({ ...props }) => <h3 className="font-bold text-xl mt-6" {...props} />,
+					h3: ({ ...props }) => <h3 className="font-bold text-lg my-2" {...props} />,
 					h4: ({ ...props }) => <h4 className="font-semibold text-md mt-3" {...props} />,
 					p: ({ ...props }) => <p className="my-4" {...props} />,
 					code: ({ ...props }) => <code className="bg-neutral-200 px-1 font-mono text-sm" {...props} />,
