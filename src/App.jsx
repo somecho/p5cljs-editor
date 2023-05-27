@@ -8,6 +8,7 @@ import { useState } from 'react'
 const App = () => {
 	const [about, setAbout] = useState("")
 	const [tutorial, setTutorial] = useState("")
+	const [changelog, setChangelog] = useState("")
 
 	import("./pages/about.md").then(res => {
 		fetch(res.default)
@@ -19,6 +20,11 @@ const App = () => {
 			.then(res => res.text())
 			.then(text => setTutorial(text))
 	})
+	import('../CHANGELOG.md').then(res => {
+		fetch(res.default)
+			.then(res => res.text())
+			.then(text => setChangelog(text))
+	})
 
 	return (
 		<Routes>
@@ -26,6 +32,7 @@ const App = () => {
 				<Route index element={<Editor />} />
 				<Route path="about" element={<Article markdown={about} />} />
 				<Route path="tutorial" element={<Article markdown={tutorial} />} />
+				<Route path="changelog" element={<Article markdown={changelog} />} />
 			</Route>
 		</Routes>
 	)

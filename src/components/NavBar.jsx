@@ -22,6 +22,11 @@ const NavBar = () => {
 						Tutorial
 					</Link>
 				</li>
+				<li className="pt-3 px-4">
+					<Link to="changelog">
+						Changelog
+					</Link>
+				</li>
 			</ul>
 		</nav>
 	)
