@@ -31,7 +31,7 @@ const Editor = () => {
 			const script = document.createElement("script")
 			script.setAttribute("id", "user-sketch")
 			script.innerHTML = compileResult;
-			document.getElementById('user-script').appendChild(script)
+			document.getElementById('editor').appendChild(script)
 
 			assignWindowGlobals()
 		} else {
@@ -60,7 +60,6 @@ const Editor = () => {
 
 	return (
 		<div id="editor">
-			<div id="user-script"></div>
 			<button
 				className="m-2 px-2 py-1 bg-fuchsia-600 rounded text-white font-black"
 				onClick={run}
