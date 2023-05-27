@@ -22,6 +22,9 @@ yarn
 yarn dev
 ```
 
+### Testing
+Make sure the dev server is running at `http://localhost:5173` then `yarn test`.
+
 ### Compiling ClojureScript in the browser
 The ClojureScript library for Clojure can, using `cljs.js/compile-str` compile itself (i.e. a string of valid ClojureScript). To leverage this _pretty cool_ fact, this editor uses the ClojureScript core library already compiled to JavaScript using [cljs-compiler-compiler](https://github.com/somecho/cljs-compiler-compiler). 
 
@@ -30,6 +33,7 @@ Contributors are welcome. There are no concrete contributing guidelines right no
 1. Fork this repo
 2. Create a branch from the **dev** branch
 3. Make a pull request to the **dev** branch
+4. Make sure your changes do not break anything. See [testing](#Testing)
 
 ## Disclaimer
 This project is not affiliated with [p5.js](https://p5js.org/) or the [Processing Foundation](https://processing.org/).
