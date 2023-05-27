@@ -1,3 +1,6 @@
+## 0.9.0
+- added changelog to the web editor for users to track changes
+
 ## 0.8.6
 - added `.node-version` for compatibility with Render
  
