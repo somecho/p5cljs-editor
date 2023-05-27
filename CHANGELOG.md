@@ -1,3 +1,10 @@
+# 0.8.5
+## Code Changes
+- write integration test for the app components with Puppeteer
+## Bug Fixes
+- [c74a398](https://github.com/somecho/p5-cljs-web-editor/commit/c74a398be5adf0994de169dc98f74d73c66af173) running a valid sketch after running an invalid sketch ([#35](https://github.com/somecho/p5-cljs-web-editor/issues/35)) now produces a valid canvas
+- [06cf328](https://github.com/somecho/p5-cljs-web-editor/commit/06cf328bc38b49669e166b2cccc9e70b69dce5d9#diff-9b236b1937ff5f05a6b5fc3f2e8617684bf19d961b50c44529684d70651dc592R43) a sketch will not be created when the user's code does not compile
+
 # 0.8.4
 ## Code Changes
 - refactor code for testability and less mutability
