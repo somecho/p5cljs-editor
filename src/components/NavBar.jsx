@@ -14,7 +14,7 @@ const NavBar = ({ methods }) => {
 						Editor
 					</Link>
 				</li>
-				<Menu>
+				<Menu id="sketch-dropdown">
 					<MenuButton as="li" className="pt-3 px-4">
 						Sketch ▾
 					</MenuButton>
@@ -22,11 +22,11 @@ const NavBar = ({ methods }) => {
 						<MenuItem className="hover:bg-neutral-100 text-sm p-1 m-0">
 							Add CDN Link
 						</MenuItem>
-						<MenuItem className="hover:bg-neutral-100 text-sm p-1 m-0"
+						<MenuItem className="hover:bg-neutral-100 text-sm p-1 m-0 dropdown-run"
 							onClick={() => { methods.run() }}>
 							Run <span className="ml-2 text-xs">Alt+Enter</span>
 						</MenuItem>
-						<MenuItem className="hover:bg-neutral-100 text-sm p-1 m-0"
+						<MenuItem className="hover:bg-neutral-100 text-sm p-1 m-0 dropdown-stop"
 							onClick={() => { methods.stop() }}>
 							Stop <span className="ml-2 text-xs">Alt+Shift+Enter</span>
 						</MenuItem>
