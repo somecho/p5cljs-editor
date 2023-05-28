@@ -1,3 +1,8 @@
+## 0.11.0
+- restyled the UI with Chakra UI
+### New Features
+- added a 'sketch' dropdown menu to navbar where start and stop is also available
+
 ## 0.10.0
 ### New Features
 - Start and Stop keymaps added! Alt+Enter to start a sketch and Alt+Shift+Enter to stop
