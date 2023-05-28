@@ -6,11 +6,24 @@ import { useSearchParams } from 'react-router-dom'
 import { defaultSketch, compile } from '../lib/cljs'
 import { encode, decode } from "../lib/compression"
 import p5 from 'p5'
+import { keymap } from '@codemirror/view'
 
 const Editor = () => {
 	const [source, setSource] = useState("")
 	const [urlParams, setUrlParams] = useSearchParams();
 	const [error, setError] = useState(null);
+	const extensions = [
+		clojure(),
+		keymap.of([
+			{
+				key: "Alt-Enter",
+				run: () => { run(); return true; }
+			}, {
+				key: "Alt-Shift-Enter",
+				run: () => { stop(); return true; }
+			}
+		])
+	]
 
 	useEffect(() => {
 		setSource(defaultSketch)
@@ -75,7 +88,7 @@ const Editor = () => {
 			<div className="flex justify-evenly">
 				<CodeMirror
 					value={source}
-					extensions={[clojure()]}
+					extensions={extensions}
 					onChange={e => setSource(e)}
 					height="75vh"
 					className="grow shrink border border-neutral-200 w-0 rounded m-2"
