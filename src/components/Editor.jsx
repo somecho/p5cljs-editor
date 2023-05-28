@@ -8,7 +8,7 @@ import { encode, decode } from "../lib/compression"
 import p5 from 'p5'
 import { keymap } from '@codemirror/view'
 
-const Editor = () => {
+const Editor = ({ setMethods }) => {
 	const [source, setSource] = useState("")
 	const [urlParams, setUrlParams] = useSearchParams();
 	const [error, setError] = useState(null);
@@ -72,9 +72,16 @@ const Editor = () => {
 		clearWindowGlobals();
 		removeElementById("defaultCanvas0")
 	}
+	function bogus() {
+		console.log("Hello run")
+	}
+
+	useEffect(() => {
+		setMethods({ run, stop })
+	}, [source])
 
 	return (
-		<div id="editor">
+		<div id="editor" className="mt-12">
 			<button
 				className="m-2 px-2 py-1 bg-fuchsia-600 rounded text-white font-black"
 				id="run-btn"
@@ -90,7 +97,7 @@ const Editor = () => {
 					value={source}
 					extensions={extensions}
 					onChange={e => setSource(e)}
-					height="75vh"
+					height="70vh"
 					className="grow shrink border border-neutral-200 w-0 rounded m-2"
 				/>
 				<div id="canvas-parent" className="grow shrink w-0 m-2">

@@ -9,6 +9,7 @@ const App = () => {
 	const [about, setAbout] = useState("")
 	const [tutorial, setTutorial] = useState("")
 	const [changelog, setChangelog] = useState("")
+	const [methods, setMethods] = useState(null)
 
 	import("./pages/about.md").then(res => {
 		fetch(res.default)
@@ -28,8 +29,8 @@ const App = () => {
 
 	return (
 		<Routes>
-			<Route path="" element={<MainLayout />}>
-				<Route index element={<Editor />} />
+			<Route path="" element={<MainLayout methods={methods} />}>
+				<Route index element={<Editor setMethods={setMethods} />} />
 				<Route path="about" element={<Article markdown={about} />} />
 				<Route path="tutorial" element={<Article markdown={tutorial} />} />
 				<Route path="changelog" element={<Article markdown={changelog} />} />
