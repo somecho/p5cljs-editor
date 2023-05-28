@@ -26,9 +26,9 @@ describe('App integration test', () => {
 		const width = await page.$eval('#defaultCanvas0', e => e.getAttribute("width"))
 
 		await page.click('.cm-editor')
-		await page.keyboard.down('ControlLeft')
+		await page.keyboard.down('Control')
 		await page.keyboard.press('KeyA')
-		await page.keyboard.up('ControlLeft')
+		await page.keyboard.up('Control')
 		await page.keyboard.press('Backspace')
 		await page.keyboard.type('(defn setup[] (js/createCanvas 1800 1800))')
 
@@ -57,5 +57,22 @@ describe('App integration test', () => {
 
 		await page.click('#run-btn')
 		await expect(page.$('#defaultCanvas0')).resolves.toBeTruthy()
+	})
+
+	it('starts and stops a sketch with keyboard', async () => {
+		await page.click('.cm-editor')
+		await page.keyboard.down('Alt')
+		await page.keyboard.press('Enter')
+		await page.keyboard.up('Alt')
+
+		await expect(page.$('#defaultCanvas0')).resolves.toBeTruthy()
+
+		await page.keyboard.down('Alt')
+		await page.keyboard.down('Shift')
+		await page.keyboard.press('Enter')
+		await page.keyboard.up('Alt')
+		await page.keyboard.up('Shift')
+
+		await expect(page.$('#defaultCanvas0')).resolves.toBeNull()
 	})
 })
