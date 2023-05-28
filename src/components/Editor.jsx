@@ -7,6 +7,7 @@ import { defaultSketch, compile } from '../lib/cljs'
 import { encode, decode } from "../lib/compression"
 import p5 from 'p5'
 import { keymap } from '@codemirror/view'
+import { Text, Flex, Box, Button } from '@chakra-ui/react'
 
 const Editor = ({ setMethods }) => {
 	const [source, setSource] = useState("")
@@ -72,38 +73,54 @@ const Editor = ({ setMethods }) => {
 		clearWindowGlobals();
 		removeElementById("defaultCanvas0")
 	}
-	function bogus() {
-		console.log("Hello run")
-	}
 
 	useEffect(() => {
 		setMethods({ run, stop })
 	}, [source])
 
 	return (
-		<div id="editor" className="mt-12">
-			<button
-				className="m-2 px-2 py-1 bg-fuchsia-600 rounded text-white font-black"
+		<Box id="editor" pt="6">
+			<Button
+				backgroundColor="pink.500"
+				color="white"
 				id="run-btn"
 				onClick={run}
-			>run</button>
-			<button
-				className="m-2 px-2 py-1 bg-neutral-400 rounded text-white font-black"
+				mx="2"
+				p="3"
+				fontWeight="bold"
+			>
+				run
+			</Button>
+			<Button
+				backgroundColor="gray.200"
+				color="gray.600"
+				p="3"
+				mx="2"
 				onClick={stop}
 				id="stop-btn"
-			>stop</button>
-			<div className="flex justify-evenly">
-				<CodeMirror
-					value={source}
-					extensions={extensions}
-					onChange={e => setSource(e)}
-					height="70vh"
-					className="grow shrink border border-neutral-200 w-0 rounded m-2"
-				/>
-				<div id="canvas-parent" className="grow shrink w-0 m-2">
-				</div>
-			</div>
-		</div>
+				fontWeight="bold"
+			>
+				stop
+			</Button>
+			<Flex>
+				<Box
+					flex="1"
+					border="1px"
+					borderColor="gray.200"
+					borderRadius="md"
+					overflow="hidden"
+					m="2"
+				>
+					<CodeMirror
+						value={source}
+						extensions={extensions}
+						onChange={e => setSource(e)}
+						height="70vh"
+					/>
+				</Box>
+				<Box flex="1" id="canvas-parent" m="2" />
+			</Flex>
+		</Box >
 	)
 }
 
