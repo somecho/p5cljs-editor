@@ -1,3 +1,7 @@
+## 0.10.0
+### New Features
+- Start and Stop keymaps added! Alt+Enter to start a sketch and Alt+Shift+Enter to stop
+ 
 ## 0.9.0
 - added changelog to the web editor for users to track changes
 
