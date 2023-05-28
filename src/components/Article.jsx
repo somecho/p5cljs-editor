@@ -1,6 +1,7 @@
 import ReactMarkdown from 'react-markdown'
 import hljs from "highlight.js"
 import { useEffect } from 'react'
+import { Box, Heading, Text } from '@chakra-ui/layout'
 
 const Article = ({ markdown }) => {
 
@@ -9,21 +10,22 @@ const Article = ({ markdown }) => {
 	}, [markdown])
 
 	return (
-		<section className="m-12 w-[46vw]">
+		<Box as="section"
+			m="16"
+			w="46vw"
+		>
 			<ReactMarkdown
 				children={markdown}
 				components={{
-					h1: ({ ...props }) => <h1 className="font-bold text-4xl my-8" {...props} />,
-					h2: ({ ...props }) => <h2 className="font-bold text-2xl mt-6" {...props} />,
-					h3: ({ ...props }) => <h3 className="font-bold text-lg my-2" {...props} />,
-					h4: ({ ...props }) => <h4 className="font-semibold text-md mt-3" {...props} />,
-					p: ({ ...props }) => <p className="my-4" {...props} />,
+					h1: ({ ...props }) => <Heading as="h1" fontSize="4xl" my="16" {...props} />,
+					h2: ({ ...props }) => <Heading as="h2" fontSize="3xl" my="12" {...props} />,
+					h3: ({ ...props }) => <Heading as="h3" fontSize="2xl" my="8" {...props} />,
+					h4: ({ ...props }) => <Heading as="h4" fontSize="lg" my="4" {...props} />,
+					p: ({ ...props }) => <Text my="2" className="my-4" {...props} />,
 					code: ({ ...props }) => <code className="bg-neutral-200 px-1 font-mono text-sm" {...props} />,
-					li: ({ ...props }) => <li className="list-disc list-inside" {...props} />,
-					a: ({ ...props }) => <a className="underline text-blue-800"{...props} />
 				}}
 			/>
-		</section>
+		</Box>
 	)
 }
 
