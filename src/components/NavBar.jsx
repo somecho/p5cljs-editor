@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Box, HStack, Menu, MenuButton, MenuList, MenuItem, List, ListItem, useDisclosure } from "@chakra-ui/react"
+import { Box, HStack, Menu, MenuButton, Text, MenuList, MenuItem, List, ListItem, useDisclosure } from "@chakra-ui/react"
 import CDNModal from "./CDNModal"
 
 const NavBar = ({ methods }) => {
@@ -43,17 +43,25 @@ const NavBar = ({ methods }) => {
 							Sketch ▾
 						</MenuButton>
 						<MenuList className="border-neutral-200 border">
+							{/* TODO
 							<MenuItem className="hover:bg-neutral-100 text-sm p-1 m-0"
 								onClick={() => { onOpen() }}>
 								Add CDN Link
 							</MenuItem>
-							<MenuItem className="hover:bg-neutral-100 text-sm p-1 m-0 dropdown-run"
-								onClick={() => { methods.run() }}>
-								Run <span className="ml-2 text-xs">Alt+Enter</span>
+							*/}
+							<MenuItem
+								fontSize="sm"
+								className="dropdown-run"
+								onClick={() => { methods.run() }}
+							>
+								Run <Text fontSize="xs" ml="2">Alt+Enter</Text>
 							</MenuItem>
-							<MenuItem className="hover:bg-neutral-100 text-sm p-1 m-0 dropdown-stop"
-								onClick={() => { methods.stop() }}>
-								Stop <span className="ml-2 text-xs">Alt+Shift+Enter</span>
+							<MenuItem
+								fontSize="sm"
+								className="dropdown-stop"
+								onClick={() => { methods.stop() }}
+							>
+								Stop <Text fontSize="xs" ml="2">Alt+Shift+Enter</Text>
 							</MenuItem>
 						</MenuList>
 					</Menu>
