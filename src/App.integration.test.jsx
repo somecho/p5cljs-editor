@@ -75,4 +75,22 @@ describe('App integration test', () => {
 
 		await expect(page.$('#defaultCanvas0')).resolves.toBeNull()
 	})
+
+	it('starts and stops a sketch with dropdown buttons', async () => {
+		const initialUrl = page.url()
+
+		await expect(page.$('#menu-button-sketch-dropdown')).resolves.toBeTruthy()
+
+		await page.click('#menu-button-sketch-dropdown')
+		await page.click('.dropdown-run')
+		await expect(page.$('#defaultCanvas0')).resolves.toBeTruthy()
+		expect(page.url()).not.toBe(initialUrl)
+
+		//makes sure running a sketch doesn't break the menu
+		await expect(page.$('#menu-button-sketch-dropdown')).resolves.toBeTruthy()
+
+		await page.click('#menu-button-sketch-dropdown')
+		await page.click('.dropdown-stop')
+		await expect(page.$('#defaultCanvas0')).resolves.toBeNull()
+	})
 })

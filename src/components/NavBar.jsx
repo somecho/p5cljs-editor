@@ -1,34 +1,84 @@
 import { Link } from "react-router-dom"
+import { Box, HStack, Menu, MenuButton, Text, MenuList, MenuItem, List, ListItem, useDisclosure } from "@chakra-ui/react"
+import CDNModal from "./CDNModal"
 
-const NavBar = () => {
+const NavBar = ({ methods }) => {
+	const { isOpen, onOpen, onClose } = useDisclosure()
 	return (
-		<nav className="border-b border-neutral-200 mb-4 flex" id="navigation">
-			<div className="bg-fuchsia-600 p-2 text-white font-black text-xl">
-				p5.cljs
-			</div>
-			<ul className="flex align-center mx-4 text-neutral-500">
-				<li className="pt-3 px-4">
-					<Link to="">
-						Editor
-					</Link>
-				</li>
-				<li className="pt-3 px-4">
-					<Link to="about">
-						About
-					</Link>
-				</li>
-				<li className="pt-3 px-4">
-					<Link to="tutorial">
-						Tutorial
-					</Link>
-				</li>
-				<li className="pt-3 px-4">
-					<Link to="changelog">
-						Changelog
-					</Link>
-				</li>
-			</ul>
-		</nav>
+		<>
+			<HStack
+				as="nav"
+				borderBottom="1px"
+				borderColor="gray.200"
+				id="navigation"
+			>
+				<Box
+					backgroundColor="pink.500"
+					py="2"
+					px="4"
+					fontSize="xl"
+					color="white"
+					fontWeight="black"
+				>
+					p5.cljs
+				</Box>
+				<HStack
+					as={List}
+					spacing="24px"
+					px="4"
+					color="gray.600"
+				>
+					<ListItem className="pt-3 px-4">
+						<Link to="about">
+							About
+						</Link>
+					</ListItem>
+					<ListItem className="pt-3 px-4">
+						<Link to="">
+							Editor
+						</Link>
+					</ListItem>
+					<Menu id="sketch-dropdown">
+						<MenuButton className="pt-3 px-4">
+							Sketch ▾
+						</MenuButton>
+						<MenuList className="border-neutral-200 border">
+							{/* TODO
+							<MenuItem className="hover:bg-neutral-100 text-sm p-1 m-0"
+								onClick={() => { onOpen() }}>
+								Add CDN Link
+							</MenuItem>
+							*/}
+							<MenuItem
+								fontSize="sm"
+								className="dropdown-run"
+								onClick={() => { methods.run() }}
+							>
+								Run <Text fontSize="xs" ml="2">Alt+Enter</Text>
+							</MenuItem>
+							<MenuItem
+								fontSize="sm"
+								className="dropdown-stop"
+								onClick={() => { methods.stop() }}
+							>
+								Stop <Text fontSize="xs" ml="2">Alt+Shift+Enter</Text>
+							</MenuItem>
+						</MenuList>
+					</Menu>
+					<ListItem className="pt-3 px-4">
+						<Link to="tutorial">
+							Tutorial
+						</Link>
+					</ListItem>
+					<ListItem className="pt-3 px-4">
+						<Link to="changelog">
+							Changelog
+						</Link>
+					</ListItem>
+				</HStack>
+			</HStack>
+			<CDNModal isOpen={isOpen} onClose={onClose} />
+		</>
 	)
 }
 
