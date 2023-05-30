@@ -9,6 +9,7 @@ const App = () => {
 	const [about, setAbout] = useState("")
 	const [tutorial, setTutorial] = useState("")
 	const [changelog, setChangelog] = useState("")
+	const [gallery, setGallery] = useState("")
 	const [methods, setMethods] = useState(null)
 
 	import("./pages/about.md").then(res => {
@@ -20,6 +21,12 @@ const App = () => {
 		fetch(res.default)
 			.then(res => res.text())
 			.then(text => setTutorial(text))
+	})
+
+	import("../gallery.md").then(res => {
+		fetch(res.default)
+			.then(res => res.text())
+			.then(text => setGallery(text))
 	})
 	import('../CHANGELOG.md').then(res => {
 		fetch(res.default)
@@ -36,6 +43,7 @@ const App = () => {
 					<Route path="about" element={<Article markdown={about} />} />
 					<Route path="tutorial" element={<Article markdown={tutorial} />} />
 					<Route path="changelog" element={<Article markdown={changelog} />} />
+					<Route path="gallery" element={<Article markdown={gallery} />} />
 				</Route>
 			</Routes>
 		</>

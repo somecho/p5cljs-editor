@@ -72,6 +72,11 @@ const NavBar = ({ methods }) => {
 						</Link>
 					</ListItem>
 					<ListItem className="pt-3 px-4">
+						<Link to="gallery">
+							Gallery
+						</Link>
+					</ListItem>
+					<ListItem className="pt-3 px-4">
 						<Link to="changelog">
 							Changelog
 						</Link>

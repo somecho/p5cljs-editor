@@ -1,7 +1,7 @@
 import ReactMarkdown from 'react-markdown'
 import hljs from "highlight.js"
 import { useEffect } from 'react'
-import { Box, Heading, Text } from '@chakra-ui/layout'
+import { Box, Heading, Text, Link } from '@chakra-ui/layout'
 
 const Article = ({ markdown }) => {
 
@@ -22,7 +22,15 @@ const Article = ({ markdown }) => {
 					h3: ({ ...props }) => <Heading as="h3" fontSize="2xl" my="8" {...props} />,
 					h4: ({ ...props }) => <Heading as="h4" fontSize="lg" my="4" {...props} />,
 					p: ({ ...props }) => <Text my="2" className="my-4" {...props} />,
-					code: ({ ...props }) => <code className="bg-neutral-200 px-1 font-mono text-sm" {...props} />,
+					a: ({ ...props }) => <Link color="pink.500" {...props} />,
+					// code: ({ ...props }) => <Text
+					// 	display='inline'
+					// 	backgroundColor="gray.200"
+					// 	px="2"
+					// 	fontFamily="JetBrains Mono"
+					// 	fontSize="sm"
+					// 	borderRadius="md"
+					// 	{...props} />
 				}}
 			/>
 		</Box>
