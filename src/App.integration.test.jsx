@@ -93,4 +93,63 @@ describe('App integration test', () => {
 		await page.click('.dropdown-stop')
 		await expect(page.$('#defaultCanvas0')).resolves.toBeNull()
 	})
+
+	it('expects chroma call without cdn to fail', async () => {
+		await page.click('.cm-editor')
+		await page.keyboard.down('Control')
+		await page.keyboard.press('KeyA')
+		await page.keyboard.up('Control')
+		await page.keyboard.press('Backspace')
+		await page.keyboard.type('(defn setup [] (js/createCanvas 400 400) (js/console.log (js/chroma "ffffff")))')
+		await page.click('#run-btn')
+		const style = await page.$eval('#defaultCanvas0', e => e.getAttribute("style"))
+		expect(style).toBe("visibility: hidden; width: 400px; height: 400px;")
+	})
+
+	it('tests cdn links are addable, persistent and functional', async () => {
+		// warm up p5
+		await page.click('#run-btn')
+		await expect(page.$('#defaultCanvas0')).resolves.toBeTruthy()
+		await page.click('#stop-btn')
+		await expect(page.$('#defaultCanvas0')).resolves.toBeNull()
+
+		// add two cdn links
+		await page.click('#menu-button-sketch-dropdown')
+		await page.click(".dropdown-add-cdn")
+
+		await page.click("#cdn-input")
+		await page.keyboard.type("https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js")
+		await page.click("#add-cdn-button")
+
+		await page.click("#cdn-input")
+		await page.keyboard.type("https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.4.2/chroma.min.js")
+		await page.click("#add-cdn-button")
+
+		await page.$$('.cdn-link').then(els => { expect(els.length).toBe(2) })
+		expect(page.url()).toBe("http://localhost:5173/?sketch=00hJTctTKE4tKS1QiI7lUlDQyCrWTy5KTSxJdU7MK0ssVjAxMABhTU0uiNqUosRyhNKkxOTs9KL80rwUBSMjoCIA&cdn=yygpKSi20tdPTsnLKtZLzskvTUnLSSxK1UvOz9VPzEqs0M%2FJTCrWL8nPS9U3NNGz0DOx1A8BcvSyigE%3D&cdn=LcfBDYAgDAXQiexPiCe3qUUDDaWGYuL4Xji%2BMucTByC5a5A0f%2FPdeFwkbmDlD62eASnDjTcNJNopLZPVTho%2F")
+
+		await page.click("#close-cdn-modal-button")
+
+		// test chroma js does not throw error
+		await page.click('.cm-editor')
+		await page.keyboard.down('Control')
+		await page.keyboard.press('KeyA')
+		await page.keyboard.up('Control')
+		await page.keyboard.press('Backspace')
+		await page.keyboard.type('(defn setup [] (js/createCanvas 400 400) (js/console.log (js/chroma "ffffff")))')
+
+		await page.click('#run-btn')
+		await expect(page.$('#defaultCanvas0')).resolves.toBeTruthy()
+
+		let style = await page.$eval('#defaultCanvas0', e => e.getAttribute("style"))
+		expect(style).toBe("width: 400px; height: 400px;")
+
+		// test persistence
+		await page.reload()
+		await page.click('#run-btn')
+		await expect(page.$('#defaultCanvas0')).resolves.toBeTruthy()
+
+		style = await page.$eval('#defaultCanvas0', e => e.getAttribute("style"))
+		expect(style).toBe("width: 400px; height: 400px;")
+	})
 })

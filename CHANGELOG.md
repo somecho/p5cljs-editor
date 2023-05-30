@@ -1,3 +1,11 @@
+## 0.12.0
+### New Features
+- users can now add cdn links to their sketches! 
+- Simply click 'sketch' and 'add cdn', paste in a cdn link (like Chroma.js) and click 'add'
+- The chroma library is now available for use!
+### Patches
+- add try-catch clause when instantiating `new p5()`
+
 ## 0.11.0
 - restyled the UI with Chakra UI
 ### New Features
