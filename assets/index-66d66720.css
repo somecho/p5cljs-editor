@@ -1,4 +1,4 @@
-@import"https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap";@import"https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital@0;1&display=swap";*{font-family:Open Sans,sans-serif}.cm-editor *,.hljs *{font-family:JetBrains Mono,monospace}section>p>a{color:#00f;text-decoration:underline}pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}/*!
+@import"https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap";@import"https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital@0;1&display=swap";*{font-family:Open Sans,sans-serif}.cm-editor *,.hljs *{font-family:JetBrains Mono,monospace}section>p>a{color:#00f;text-decoration:underline}section>p>code{padding:0 4px;background:#f0f0f0;border-radius:4px;font-family:JetBrains Mono,monospace;font-size:.8em}pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}/*!
   Theme: StackOverflow Light
   Description: Light theme as used on stackoverflow.com
   Author: stackoverflow.com
