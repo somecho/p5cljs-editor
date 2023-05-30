@@ -1,3 +1,6 @@
+## 0.13.0
+- The gallery / examples can now be view in the UI via the Gallery in the navigation
+
 ## 0.12.0
 ### New Features
 - users can now add cdn links to their sketches! 
