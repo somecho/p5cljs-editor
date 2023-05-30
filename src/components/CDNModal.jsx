@@ -5,25 +5,105 @@ import {
 	ModalHeader,
 	ModalFooter,
 	ModalBody,
-	ModalCloseButton,
+	Flex,
+	Button,
+	Input,
+	Text,
+	Spacer
 } from '@chakra-ui/react'
+import { useEffect, useState } from 'react';
+import { encode, decode } from "../lib/compression"
+import { useSearchParams } from 'react-router-dom'
 
 const CDNModal = ({ isOpen, onClose }) => {
+	const [cdnLinks, setCdnLinks] = useState([])
+	const [userInput, setUserInput] = useState("")
+	const [urlParams, setUrlParams] = useSearchParams();
+
+	useEffect(() => {
+		let cdns = []
+		for (const param of urlParams.entries()) {
+			if (param[0] == "cdn") {
+				cdns = [...cdns, decode(param[1])]
+			}
+		}
+		setCdnLinks(cdns)
+	}, [])
+
+	useEffect(() => {
+		const cdnContainer = document.getElementById("cdn-container")
+		while (cdnContainer.firstChild) {
+			cdnContainer.removeChild(cdnContainer.lastChild)
+		}
+		cdnLinks.forEach(link => {
+			const script = document.createElement("script")
+			script.src = link
+			script.className = "cdn-link"
+			cdnContainer.appendChild(script)
+		})
+
+		const params = {}
+		for (const param of urlParams.entries()) {
+			params[param[0]] = param[1]
+		}
+		params["cdn"] = cdnLinks.map(link => encode(link))
+		setUrlParams(params)
+	}, [cdnLinks])
+
+	function onAdd() {
+		setCdnLinks([...cdnLinks, userInput])
+		setUserInput("")
+	}
+
+	function onDelete(i) {
+		setCdnLinks(cdnLinks.filter((_, j) => i != j))
+	}
+
 	return (
-		<Modal isOpen={isOpen} onClose={onClose}>
+		<Modal isOpen={isOpen} onClose={onClose} size="2xl">
 			<ModalOverlay>
 				<ModalContent>
 					<ModalHeader>Add CDN</ModalHeader>
 					<ModalBody>
-						BODY
+						{cdnLinks.map((cdnLink, i) => (
+							<Flex key={cdnLink} align="center">
+								<Text>
+									{cdnLink}
+								</Text>
+								<Spacer />
+								<Button
+									variant='ghost'
+									onClick={() => { onDelete(i) }}
+								>×</Button>
+							</Flex>)
+						)}
+						<Input
+							my="2"
+							value={userInput}
+							onChange={e => setUserInput(e.target.value)}
+							id="cdn-input"
+						/>
 					</ModalBody>
 					<ModalFooter>
-						FOOTER
+						<Button
+							onClick={() => { onClose() }}
+							id="close-cdn-modal-button"
+						>
+							close
+						</Button>
+						<Button
+							backgroundColor="pink.500"
+							color="white"
+							ml="4"
+							id="add-cdn-button"
+							onClick={() => { onAdd() }}
+						>
+							add
+						</Button>
 					</ModalFooter>
 				</ModalContent>
 			</ModalOverlay>
-
-		</Modal>
+		</Modal >
 	)
 
 }
