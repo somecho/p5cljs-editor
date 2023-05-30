@@ -16,3 +16,11 @@ section>p>a{
 	color: blue;
 	text-decoration: underline;
 }
+
+section>p>code{
+	padding: 0 4px;
+	background: #f0f0f0;
+	border-radius: 4px;
+	font-family: 'JetBrains Mono', monospace;
+	font-size: 0.8em;
+}
