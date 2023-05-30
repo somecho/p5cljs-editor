@@ -28,14 +28,17 @@ const App = () => {
 	})
 
 	return (
-		<Routes>
-			<Route path="" element={<MainLayout methods={methods} />}>
-				<Route index element={<Editor setMethods={setMethods} />} />
-				<Route path="about" element={<Article markdown={about} />} />
-				<Route path="tutorial" element={<Article markdown={tutorial} />} />
-				<Route path="changelog" element={<Article markdown={changelog} />} />
-			</Route>
-		</Routes>
+		<>
+			<div id="cdn-container" />
+			<Routes>
+				<Route path="" element={<MainLayout methods={methods} />}>
+					<Route index element={<Editor setMethods={setMethods} />} />
+					<Route path="about" element={<Article markdown={about} />} />
+					<Route path="tutorial" element={<Article markdown={tutorial} />} />
+					<Route path="changelog" element={<Article markdown={changelog} />} />
+				</Route>
+			</Routes>
+		</>
 	)
 }
 

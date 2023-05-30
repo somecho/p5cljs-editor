@@ -11,11 +11,23 @@ import {
 	Text,
 	Spacer
 } from '@chakra-ui/react'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const CDNModal = ({ isOpen, onClose }) => {
 	const [cdnLinks, setCdnLinks] = useState([])
 	const [userInput, setUserInput] = useState("")
+
+	useEffect(() => {
+		const cdnContainer = document.getElementById("cdn-container")
+		while (cdnContainer.firstChild) {
+			cdnContainer.removeChild(cdnContainer.lastChild)
+		}
+		cdnLinks.forEach(link => {
+			const script = document.createElement("script")
+			script.src = link
+			cdnContainer.appendChild(script)
+		})
+	}, [cdnLinks])
 
 	function onAdd() {
 		setCdnLinks([...cdnLinks, userInput])
