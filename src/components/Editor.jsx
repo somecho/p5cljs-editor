@@ -55,7 +55,11 @@ const Editor = ({ setMethods }) => {
 		}
 
 		if (compileResult.name != "Error") {
-			new p5()
+			try {
+				new p5()
+			} catch (e) {
+				console.error(e)
+			}
 			const p5canvas = document.getElementById('defaultCanvas0')
 			if (p5canvas) {
 				document.getElementById("canvas-parent").appendChild(p5canvas);

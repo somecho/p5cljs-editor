@@ -45,6 +45,7 @@ const NavBar = ({ methods }) => {
 						<MenuList className="border-neutral-200 border">
 							<MenuItem
 								fontSize="sm"
+								className="dropdown-add-cdn"
 								onClick={() => { onOpen() }}>
 								Add CDN Link
 							</MenuItem>
