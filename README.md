@@ -6,28 +6,34 @@
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/p5cljs-editor/p5cljs-editor.github.io)
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fp5cljs-editor%2Fp5cljs-editor.github.io%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/p5cljs-editor/p5cljs-editor.github.io/goto?ref=master)
 
-Inspired by the wonderful [p5.js web editor](https://editor.p5js.org/). Now you write your p5 sketches using [ClojureScript](https://clojurescript.org/) in your browser! Try [the editor](https://p5cljs-editor.onrender.com/) out for yourself.
+Inspired by the wonderful [p5.js web editor](https://editor.p5js.org/). Now you can write p5 sketches using [ClojureScript](https://clojurescript.org/) in your browser! The p5.cljs editor features:
+- 100% client side compiling (no server needed)
+- third-party extensibility via adding CDN's
+- anonymously shareable sketches
 
-### Sharing your sketches
-Every sketch is compiled right here in your browser and encoded in the URL. This makes your sketches instantly shareable. Simply copy the URL and share your sketches!
+Get started writing p5 sketches in the [p5.cljs editor](https://p5cljs-editor.github.io/).
+
 
 ## Examples
-- [Triangle abyss](https://p5cljs-editor.onrender.com/?sketch=dVPRTttAEHzPV4xaUdlAYmMUhEiFhChtkUBIJDwhHi7xJr7i%2BNy7c8Cf1N%2Fol3XvHCcO0JOi2N6d2dndudHfP0mcJBirJeEyU73RJJMGL0o%2Fg%2F9zOaPCUIqqSEnDZgRLemmg5v7l9nrS5gyA3ui70hCYqbI%2BhCHC18za0pxFkSo5R1V6RgOlF9EaYyImOB%2F0RhcPk59392ddGdeTm6szTLQUxSInXExrY9DHDyoqoWscHaIRXk2X0hipil4vSGmOycUDTgbJ6fHR6XAYNh8LlCqvF5wDfLonW%2BnCsM5cGus6Sb5hRdqyJt%2BYgKZFlQvdogafGPf4ihpapLIyKKpl38iU078wYG7I9l1EFOaJM4OcLB6NpRJB5PVs8kMON6eBIZhL7UV0SULHwjz983MEmvunjxgQLEWJz8E%2B9uCKhe9DBxxqqD8IepWrV1cGwa2wWTRTBnshmLHpkx8P8NqFds%2Bq7kCNLN5D63Ddyc5xNVf1U%2BhOu55Ui5f%2BetpwS6rYHJjSQhbjTJQUUZH6B1jlk737dtbjXvz0f5loC3Tag1QZ%2Bs11PWA9W1GWeQ3OdZsnVuTbdOBNKX6%2BvLkbX21l8iCrEo9tmZkmYelSFCthcBLH7teyFGpstXqm3R632KmYPS%2B04nuFBuPX4dZsNV%2B8YRxvJscu2Uc8iOM4GXrsUuZs3Xa4bXuy6xVHshl%2Bw22bVa%2FZhm%2FWaptt%2FifautXt2zcnDblM6XUlIZjc1n7%2F7Pc3YO0%2BB%2F2NLsgQR7spLG3fzftFpjbz9XfCrM2HM5KLzPr41lhO0Jwn4nKSIU8oYlmbGXS0ePWtyfxtxnF7PXbKBV07ep%2BG%2FwA%3D) by Somē 
----
+There is a growing collection of tutorials and sketches. Have a look at them at [the gallery](./gallery.md). Tutorials and sketches are open for community contributions. To contribute, simply modify `gallery.md` by adding a title with a link and your name. Please keep in mind that list is sorted alphabetically by title.
+
+## How your sketches are made shareable
+By opting out of the use of a database, the p5.cljs editor takes a different approach. It uses the URL as persistent data structure. All assets are encoded with the deflate algorithm and appended to the URL as a parameter. This means, after running your sketch, all you need to do is copy the link and share it.
+
+This approach does impose limitations, such as the fact that sketches have limited lengths based on the length of the resulting encoded URL. It also means that data such as image, audio and font files cannot be used shareably. To use these features, it is recommended to try p5.cljs locally on your system. 
 
 ## Local development
-To start developing locally, all you need is yarn. Clone the repo, install dependencies and start. This project is built with React + Vite. 
+The entire editor is made using React. All you need is yarn. Clone the repo, install dependencies and start.
 ```
 git clone https://github.com/somecho/p5-cljs-web-editor
 cd p5-cljs-web-editor
 yarn 
 yarn dev
 ```
-
 ### Testing
-Make sure the dev server is running at `http://localhost:5173` then `yarn test`.
+Jest is the test runner used for this project and Puppeteer the main framework. To test, make sure the dev server is running at `http://localhost:5173` then `yarn test`. Alternatively, if you are on a Linux environment, you can run the tasks in parallel like so `yarn dev & yarn test`. The Github Action that tests the project uses the latter.
 
-### Compiling ClojureScript in the browser
+## Compiling ClojureScript in the browser
 The ClojureScript library for Clojure can, using `cljs.js/compile-str` compile itself (i.e. a string of valid ClojureScript). To leverage this _pretty cool_ fact, this editor uses the ClojureScript core library already compiled to JavaScript using [cljs-compiler-compiler](https://github.com/somecho/cljs-compiler-compiler). 
 
 ## Contributing 
