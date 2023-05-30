@@ -12,7 +12,8 @@ Inspired by the wonderful [p5.js web editor](https://editor.p5js.org/). Now you 
 Every sketch is compiled right here in your browser and encoded in the URL. This makes your sketches instantly shareable. Simply copy the URL and share your sketches!
 
 ## Examples
-- [Triangle abyss](https://p5cljs-editor.onrender.com/?sketch=dVPRTttAEHzPV4xaUdlAYmMUhEiFhChtkUBIJDwhHi7xJr7i%2BNy7c8Cf1N%2Fol3XvHCcO0JOi2N6d2dndudHfP0mcJBirJeEyU73RJJMGL0o%2Fg%2F9zOaPCUIqqSEnDZgRLemmg5v7l9nrS5gyA3ui70hCYqbI%2BhCHC18za0pxFkSo5R1V6RgOlF9EaYyImOB%2F0RhcPk59392ddGdeTm6szTLQUxSInXExrY9DHDyoqoWscHaIRXk2X0hipil4vSGmOycUDTgbJ6fHR6XAYNh8LlCqvF5wDfLonW%2BnCsM5cGus6Sb5hRdqyJt%2BYgKZFlQvdogafGPf4ihpapLIyKKpl38iU078wYG7I9l1EFOaJM4OcLB6NpRJB5PVs8kMON6eBIZhL7UV0SULHwjz983MEmvunjxgQLEWJz8E%2B9uCKhe9DBxxqqD8IepWrV1cGwa2wWTRTBnshmLHpkx8P8NqFds%2Bq7kCNLN5D63Ddyc5xNVf1U%2BhOu55Ui5f%2BetpwS6rYHJjSQhbjTJQUUZH6B1jlk737dtbjXvz0f5loC3Tag1QZ%2Bs11PWA9W1GWeQ3OdZsnVuTbdOBNKX6%2BvLkbX21l8iCrEo9tmZkmYelSFCthcBLH7teyFGpstXqm3R632KmYPS%2B04nuFBuPX4dZsNV%2B8YRxvJscu2Uc8iOM4GXrsUuZs3Xa4bXuy6xVHshl%2Bw22bVa%2FZhm%2FWaptt%2FifautXt2zcnDblM6XUlIZjc1n7%2F7Pc3YO0%2BB%2F2NLsgQR7spLG3fzftFpjbz9XfCrM2HM5KLzPr41lhO0Jwn4nKSIU8oYlmbGXS0ePWtyfxtxnF7PXbKBV07ep%2BG%2FwA%3D) by Somē 
+See the [gallery](./gallery.md) of this repo. 
+
 ---
 
 ## Local development
