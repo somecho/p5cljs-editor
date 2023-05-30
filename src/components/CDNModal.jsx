@@ -38,6 +38,7 @@ const CDNModal = ({ isOpen, onClose }) => {
 		cdnLinks.forEach(link => {
 			const script = document.createElement("script")
 			script.src = link
+			script.className = "cdn-link"
 			cdnContainer.appendChild(script)
 		})
 
@@ -76,16 +77,25 @@ const CDNModal = ({ isOpen, onClose }) => {
 								>×</Button>
 							</Flex>)
 						)}
-						<Input my="2" value={userInput} onChange={e => setUserInput(e.target.value)} />
+						<Input
+							my="2"
+							value={userInput}
+							onChange={e => setUserInput(e.target.value)}
+							id="cdn-input"
+						/>
 					</ModalBody>
 					<ModalFooter>
-						<Button onClick={() => { onClose() }}>
+						<Button
+							onClick={() => { onClose() }}
+							id="close-cdn-modal-button"
+						>
 							close
 						</Button>
 						<Button
 							backgroundColor="pink.500"
 							color="white"
 							ml="4"
+							id="add-cdn-button"
 							onClick={() => { onAdd() }}
 						>
 							add
