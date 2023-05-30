@@ -66,7 +66,18 @@ const Editor = ({ setMethods }) => {
 			}
 		}
 
-		setUrlParams({ sketch: encode(source) })
+		const params = {}
+		let cdns = []
+		for (const param of urlParams.entries()) {
+			if (param[0] == "cdn") {
+				cdns = [...cdns, param[1]]
+			} else {
+				params[param[0]] = param[1]
+			}
+		}
+		params["sketch"] = encode(source)
+		params["cdn"] = cdns
+		setUrlParams(params)
 	}
 
 	function stop() {

@@ -12,10 +12,23 @@ import {
 	Spacer
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react';
+import { encode, decode } from "../lib/compression"
+import { useSearchParams } from 'react-router-dom'
 
 const CDNModal = ({ isOpen, onClose }) => {
 	const [cdnLinks, setCdnLinks] = useState([])
 	const [userInput, setUserInput] = useState("")
+	const [urlParams, setUrlParams] = useSearchParams();
+
+	useEffect(() => {
+		let cdns = []
+		for (const param of urlParams.entries()) {
+			if (param[0] == "cdn") {
+				cdns = [...cdns, decode(param[1])]
+			}
+		}
+		setCdnLinks(cdns)
+	}, [])
 
 	useEffect(() => {
 		const cdnContainer = document.getElementById("cdn-container")
@@ -27,6 +40,13 @@ const CDNModal = ({ isOpen, onClose }) => {
 			script.src = link
 			cdnContainer.appendChild(script)
 		})
+
+		const params = {}
+		for (const param of urlParams.entries()) {
+			params[param[0]] = param[1]
+		}
+		params["cdn"] = cdnLinks.map(link => encode(link))
+		setUrlParams(params)
 	}, [cdnLinks])
 
 	function onAdd() {
