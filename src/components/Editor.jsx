@@ -7,12 +7,16 @@ import { defaultSketch, compile } from '../lib/cljs'
 import { encode, decode } from "../lib/compression"
 import p5 from 'p5'
 import { keymap } from '@codemirror/view'
-import { Text, Flex, Box, Button } from '@chakra-ui/react'
+import { Text, Flex, Box, Button, Tag } from '@chakra-ui/react'
+import EditorConsole from './EditorConsole'
 
 const Editor = ({ setMethods }) => {
 	const [source, setSource] = useState("")
 	const [urlParams, setUrlParams] = useSearchParams();
 	const [error, setError] = useState(null);
+	const [consoleOpen, setConsoleOpen] = useState(false);
+	const [logs, setLogs] = useState([])
+	const [numErrors, setNumErrors] = useState(0)
 	const extensions = [
 		clojure(),
 		keymap.of([
@@ -32,8 +36,12 @@ const Editor = ({ setMethods }) => {
 			setSource(decode(urlParams.get("sketch")))
 		}
 	}, [])
+	useEffect(() => {
+		setNumErrors(logs.filter(log => log.method == 'error').length)
+	}, [logs])
 
 	function run() {
+		setLogs([])
 		stop()
 		// PREPARE P5
 		const compileResult = compile(source)
@@ -117,7 +125,8 @@ const Editor = ({ setMethods }) => {
 			>
 				stop
 			</Button>
-			<Flex>
+			<Flex
+			>
 				<Box
 					flex="1"
 					border="1px"
@@ -125,13 +134,52 @@ const Editor = ({ setMethods }) => {
 					borderRadius="md"
 					overflow="hidden"
 					m="2"
+					h="100%"
 				>
 					<CodeMirror
 						value={source}
 						extensions={extensions}
 						onChange={e => setSource(e)}
-						height="70vh"
+						transition="0.5s"
+						height={consoleOpen ? "55vh" : "75vh"}
 					/>
+					<Flex backgroundColor="#d9d9d9" justify="space-between">
+						{
+							numErrors > 0 ?
+								<Tag
+									fontSize="xs"
+									backgroundColor="red"
+									color="white"
+								>{numErrors} error{numErrors > 1 ? "s" : ""}</Tag>
+								:
+								<span />
+						}
+						<Box>
+							<Button
+								variant="ghost"
+								size="xs"
+								color="gray.700"
+								colorScheme="pink"
+								borderRadius="0"
+								id="clear-console-btn"
+								onClick={() => { setLogs([]) }}
+							>
+								clear
+							</Button>
+							<Button
+								variant="ghost"
+								size="xs"
+								color="gray.700"
+								colorScheme="pink"
+								borderRadius="0"
+								id="toggle-console-btn"
+								onClick={() => { setConsoleOpen(!consoleOpen) }}
+							>
+								console {consoleOpen ? "▼" : "▲"}
+							</Button>
+						</Box>
+					</Flex>
+					<EditorConsole open={consoleOpen} logs={logs} setLogs={setLogs} />
 				</Box>
 				<Box flex="1" id="canvas-parent" m="2" />
 			</Flex>
