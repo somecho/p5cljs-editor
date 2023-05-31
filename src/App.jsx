@@ -11,7 +11,7 @@ const App = () => {
 	const [gallery, setGallery] = useState("")
 	const [methods, setMethods] = useState(null)
 
-	import("./pages/tutorial.md").then(res => {
+	import("../tutorial.md").then(res => {
 		fetch(res.default)
 			.then(res => res.text())
 			.then(text => setTutorial(text))
