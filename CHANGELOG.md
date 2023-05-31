@@ -1,3 +1,7 @@
+## 0.13.1
+- the about page now points to the github page
+- move tutorial.md to root of repo
+
 ## 0.13.0
 - The gallery / examples can now be view in the UI via the Gallery in the navigation
 
