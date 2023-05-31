@@ -29,7 +29,9 @@ const NavBar = ({ methods }) => {
 					color="gray.600"
 				>
 					<ListItem className="pt-3 px-4">
-						<Link to="about">
+						<Link
+							to="https://github.com/p5cljs-editor/p5cljs-editor.github.io"
+							target="_blank">
 							About
 						</Link>
 					</ListItem>
