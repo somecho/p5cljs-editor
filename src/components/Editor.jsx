@@ -1,7 +1,7 @@
 import CodeMirror from '@uiw/react-codemirror'
 import { clojure } from '@nextjournal/lang-clojure'
 import { useEffect, useState } from 'react'
-import { clearWindowGlobals, p5Methods, assignWindowGlobals, createP5ScriptTag, removeElementById } from '../lib/p5'
+import { clearWindowGlobals, p5Methods, assignWindowGlobals, removeElementById, clearCljsUserGlobals } from '../lib/p5'
 import { useSearchParams } from 'react-router-dom'
 import { defaultSketch, compile } from '../lib/cljs'
 import { encode, decode } from "../lib/compression"
@@ -93,6 +93,9 @@ const Editor = ({ setMethods }) => {
 	}
 
 	function stop() {
+		if(window.cljs.user){
+			clearCljsUserGlobals()
+		}
 		clearWindowGlobals();
 		removeElementById("defaultCanvas0")
 	}
