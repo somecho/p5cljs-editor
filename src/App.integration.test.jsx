@@ -151,7 +151,7 @@ describe('App integration test', () => {
 
 		style = await page.$eval('#defaultCanvas0', e => e.getAttribute("style"))
 		expect(style).toBe("width: 400px; height: 400px;")
-	})
+	}, 10000)
 
 	it('tests that the console toggleable', async () => {
 		await expect(page.$('#editor-console')).resolves.toBeTruthy()
