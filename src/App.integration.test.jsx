@@ -196,5 +196,27 @@ describe('App integration test', () => {
 		expect(await page.$eval('#editor-console', e => e.children[0].children.length))
 			.toBe(0)
 	})
+	it('tests that user state is clean between sketches', async () => {
+		await page.click('.cm-editor')
+		await page.keyboard.down('Control')
+		await page.keyboard.press('KeyA')
+		await page.keyboard.up('Control')
+		await page.keyboard.press('Backspace')
+		await page.keyboard.type('(defn setup[] (println "HELLO"))')
+		await page.click('#run-btn')
+		expect(await page.$eval('#editor-console', e => e.children[0].children.length))
+			.toBe(1)
+
+		await page.click('.cm-editor')
+		await page.keyboard.down('Control')
+		await page.keyboard.press('KeyA')
+		await page.keyboard.up('Control')
+		await page.keyboard.press('Backspace')
+		await page.keyboard.type('(println "hello")')
+		await page.click('#run-btn')
+		expect(await page.$eval('#editor-console', e => e.children[0].children.length))
+			.toBe(1)
+
+	})
 
 })

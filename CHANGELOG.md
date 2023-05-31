@@ -1,3 +1,6 @@
+## 0.14.2
+- fix bug #57 where the setup and draw functions continue to persist even after
+  stop
 ## 0.14.1
 - add longer run time for a test case that takes longer to run
 

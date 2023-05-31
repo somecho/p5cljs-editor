@@ -1,7 +1,7 @@
 import CodeMirror from '@uiw/react-codemirror'
 import { clojure } from '@nextjournal/lang-clojure'
 import { useEffect, useState } from 'react'
-import { clearWindowGlobals, p5Methods, assignWindowGlobals, createP5ScriptTag, removeElementById } from '../lib/p5'
+import { clearWindowGlobals, p5Methods, assignWindowGlobals, removeElementById, clearCljsUserGlobals } from '../lib/p5'
 import { useSearchParams } from 'react-router-dom'
 import { defaultSketch, compile } from '../lib/cljs'
 import { encode, decode } from "../lib/compression"
@@ -13,7 +13,6 @@ import EditorConsole from './EditorConsole'
 const Editor = ({ setMethods }) => {
 	const [source, setSource] = useState("")
 	const [urlParams, setUrlParams] = useSearchParams();
-	const [error, setError] = useState(null);
 	const [consoleOpen, setConsoleOpen] = useState(false);
 	const [logs, setLogs] = useState([])
 	const [numErrors, setNumErrors] = useState(0)
@@ -56,9 +55,7 @@ const Editor = ({ setMethods }) => {
 			document.getElementById('editor').appendChild(script)
 
 			assignWindowGlobals()
-			setError("")
 		} else {
-			setError(compileResult.cause.message)
 			console.error(compileResult.cause.message)
 		}
 
@@ -93,6 +90,9 @@ const Editor = ({ setMethods }) => {
 	}
 
 	function stop() {
+		if (window.cljs.user) {
+			clearCljsUserGlobals()
+		}
 		clearWindowGlobals();
 		removeElementById("defaultCanvas0")
 	}

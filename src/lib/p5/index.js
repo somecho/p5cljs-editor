@@ -48,12 +48,22 @@ export function clearWindowGlobals() {
 }
 
 /**
+ * Sets all cljs.user functions (e.g. setup, draw) back to undefined
+ */
+export function clearCljsUserGlobals() {
+	Object.keys(window.cljs.user).forEach(key => {
+		window.cljs.user[key] = undefined;
+	})
+}
+
+
+/**
  * Creates a script element with P5 CDN and returns it.
  * @returns {string} html literal
  */
-export function createP5ScriptTag(){
+export function createP5ScriptTag() {
 	const script = document.createElement("script")
-	script.setAttribute("id","p5-cdn")
+	script.setAttribute("id", "p5-cdn")
 	script.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js")
 	return script;
 }
@@ -62,9 +72,9 @@ export function createP5ScriptTag(){
  * Removes an element from the DOM if it exists.
  * @param {string} id - id of the element to be removed from the dom
  */
-export function removeElementById(id){
+export function removeElementById(id) {
 	let elt = document.getElementById(id)
-	if(elt){
+	if (elt) {
 		elt.remove()
 	}
 }
