@@ -23,14 +23,6 @@ const Article = ({ markdown }) => {
 					h4: ({ ...props }) => <Heading as="h4" fontSize="lg" my="4" {...props} />,
 					p: ({ ...props }) => <Text my="2" className="my-4" {...props} />,
 					a: ({ ...props }) => <Link color="pink.500" {...props} />,
-					// code: ({ ...props }) => <Text
-					// 	display='inline'
-					// 	backgroundColor="gray.200"
-					// 	px="2"
-					// 	fontFamily="JetBrains Mono"
-					// 	fontSize="sm"
-					// 	borderRadius="md"
-					// 	{...props} />
 				}}
 			/>
 		</Box>
