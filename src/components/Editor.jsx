@@ -13,7 +13,6 @@ import EditorConsole from './EditorConsole'
 const Editor = ({ setMethods }) => {
 	const [source, setSource] = useState("")
 	const [urlParams, setUrlParams] = useSearchParams();
-	const [error, setError] = useState(null);
 	const [consoleOpen, setConsoleOpen] = useState(false);
 	const [logs, setLogs] = useState([])
 	const [numErrors, setNumErrors] = useState(0)
@@ -56,9 +55,7 @@ const Editor = ({ setMethods }) => {
 			document.getElementById('editor').appendChild(script)
 
 			assignWindowGlobals()
-			setError("")
 		} else {
-			setError(compileResult.cause.message)
 			console.error(compileResult.cause.message)
 		}
 
@@ -93,7 +90,7 @@ const Editor = ({ setMethods }) => {
 	}
 
 	function stop() {
-		if(window.cljs.user){
+		if (window.cljs.user) {
 			clearCljsUserGlobals()
 		}
 		clearWindowGlobals();
