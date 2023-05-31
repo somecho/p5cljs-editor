@@ -1,3 +1,10 @@
+## 0.14.1
+- add longer run time for a test case that takes longer to run
+
+## 0.14.0
+### New Features
+- there is now a console!
+
 ## 0.13.1
 - the about page now points to the github page
 - move tutorial.md to root of repo

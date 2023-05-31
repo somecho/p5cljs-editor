@@ -151,5 +151,50 @@ describe('App integration test', () => {
 
 		style = await page.$eval('#defaultCanvas0', e => e.getAttribute("style"))
 		expect(style).toBe("width: 400px; height: 400px;")
+	}, 10000)
+
+	it('tests that the console toggleable', async () => {
+		await expect(page.$('#editor-console')).resolves.toBeTruthy()
+		const height = await page.$eval('#editor-console', e => e.offsetHeight)
+		expect(height).toBe(0)
+
+		await page.click('#toggle-console-btn')
+		await expect(page.$('#editor-console')).resolves.toBeTruthy()
+		const openHeight = await page.$eval('#editor-console', e => e.offsetHeight)
+		expect(openHeight).toBeGreaterThan(height)
+
+		await page.click('#toggle-console-btn')
+		await expect(page.$('#editor-console')).resolves.toBeTruthy()
+		const closeHeight = await page.$eval('#editor-console', e => e.offsetHeight)
+		expect(closeHeight).toBe(height)
 	})
+
+	it('tests that the console is logging and clearing correctly', async () => {
+		await page.click('.cm-editor')
+		await page.keyboard.down('Control')
+		await page.keyboard.press('KeyA')
+		await page.keyboard.up('Control')
+		await page.keyboard.press('Backspace')
+		await page.keyboard.type('(println "HELLO")')
+
+		await page.click('#run-btn')
+
+		expect(await page.$eval('#editor-console', e => e.children[0].children.length))
+			.toBe(1)
+
+		await page.click('.cm-editor')
+		await page.keyboard.down('Control')
+		await page.keyboard.press('KeyA')
+		await page.keyboard.up('Control')
+		await page.keyboard.press('Backspace')
+		await page.keyboard.type('(println "HELLO")(println "HELLO 2")')
+		await page.click('#run-btn')
+		expect(await page.$eval('#editor-console', e => e.children[0].children.length))
+			.toBe(2)
+
+		await page.click('#clear-console-btn')
+		expect(await page.$eval('#editor-console', e => e.children[0].children.length))
+			.toBe(0)
+	})
+
 })
