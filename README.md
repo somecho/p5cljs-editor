@@ -4,7 +4,7 @@
 
 ---
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/p5cljs-editor/p5cljs-editor.github.io)
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fp5cljs-editor%2Fp5cljs-editor.github.io%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/p5cljs-editor/p5cljs-editor.github.io/goto?ref=master)
+![](https://github.com/p5cljs-editor/p5cljs-editor.github.io/actions/workflows/test.yml/badge.svg)
 
 Inspired by the wonderful [p5.js web editor](https://editor.p5js.org/). Now you can write p5 sketches using [ClojureScript](https://clojurescript.org/) in your browser! The p5.cljs editor features:
 - 100% client side compiling (no server needed)
