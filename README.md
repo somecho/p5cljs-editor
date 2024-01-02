@@ -11,7 +11,7 @@ Inspired by the wonderful [p5.js web editor](https://editor.p5js.org/). Now you 
 - third-party extensibility via adding CDN's
 - anonymously shareable sketches
 
-Get started writing p5 sketches in the [p5.cljs editor](https://p5cljs-editor.github.io/).
+Get started writing p5 sketches in the [p5.cljs editor](https://p5cljs-editor.soch.cc/).
 
 
 ## Examples
@@ -25,8 +25,8 @@ This approach does impose limitations, such as the fact that sketches have limit
 ## Local development
 The entire editor is made using React. All you need is yarn. Clone the repo, install dependencies and start.
 ```
-git clone https://github.com/somecho/p5-cljs-web-editor
-cd p5-cljs-web-editor
+git clone https://github.com/somecho/p5cljs-editor
+cd p5cljs-editor
 yarn 
 yarn dev
 ```
